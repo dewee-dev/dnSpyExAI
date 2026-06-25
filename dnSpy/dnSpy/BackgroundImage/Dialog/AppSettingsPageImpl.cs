@@ -287,8 +287,8 @@ namespace dnSpy.BackgroundImage.Dialog {
 
 		string? GetLastDirectory() {
 			var splits = Images.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-			foreach (var t in splits.Reverse<string>()) {
-				var f = t.Trim();
+			for (int i = splits.Length - 1; i >= 0; i--) {
+				var f = splits[i].Trim();
 				if (Directory.Exists(f))
 					return f;
 				if (File.Exists(f)) {
@@ -344,7 +344,7 @@ namespace dnSpy.BackgroundImage.Dialog {
 		}
 
 		public RawSettings GetUpdatedRawSettings() {
-			RawSettings.Images = Images.Split(LineConstants.newLineChars).Select(a => a.Trim()).Where(a => !string.IsNullOrEmpty(a)).ToArray();
+			RawSettings.Images = Images.Split(LineConstants.newLineChars).Select(a => a.Trim().ToString()).Where(a => !string.IsNullOrEmpty(a)).ToArray();
 			return RawSettings;
 		}
 	}
