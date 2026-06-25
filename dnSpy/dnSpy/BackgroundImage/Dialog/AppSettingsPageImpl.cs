@@ -287,7 +287,7 @@ namespace dnSpy.BackgroundImage.Dialog {
 
 		string? GetLastDirectory() {
 			var splits = Images.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-			foreach (var t in splits.Reverse()) {
+			foreach (var t in splits.Reverse<string>()) {
 				var f = t.Trim();
 				if (Directory.Exists(f))
 					return f;
